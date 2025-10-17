@@ -35,13 +35,11 @@ export default function SearchPage() {
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-8">
-      {/* Search Title */}
       <h1 className="text-2xl font-semibold mb-2">
         Search Results For{" "}
         <span className="text-orange-500">“{query}”</span>
       </h1>
 
-      {/* Product count info */}
       <p className="text-sm text-gray-600 mb-6">
         Displaying{" "}
         <span className="text-orange-500">
@@ -50,7 +48,6 @@ export default function SearchPage() {
         - <span className="text-orange-500">{products.length}</span> products
       </p>
 
-      {/* Filter dropdown */}
       <div className="flex justify-end mb-6">
         <div className="relative inline-block">
           <select
@@ -84,7 +81,6 @@ export default function SearchPage() {
         </div>
       </div>
 
-      {/* Product Grid */}
       {products.length > 0 ? (
         <>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">

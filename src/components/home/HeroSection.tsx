@@ -6,7 +6,6 @@ import Image from "next/image";
 export default function HeroSection() {
   return (
     <section className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden">
-      {/* background image, below */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/bg.png"

@@ -22,7 +22,6 @@ export default async function ProductDetailPage({ params }: Props) {
 
   return (
     <div className="min-h-screen">
-      {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 py-6 text-sm dark:text-[#6E6E6E]">
         <nav className="flex items-center space-x-2">
           <Link href="/" className="hover:text-orange-500">Home</Link>
@@ -35,9 +34,7 @@ export default async function ProductDetailPage({ params }: Props) {
         </nav>
       </div>
 
-      {/* Main content */}
       <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-10">
-        {/* Product Image */}
         <div className="flex items-center justify-center bg-[#EEF2F7] p-8 rounded-md shadow-sm">
           <Image
             src={product.image}

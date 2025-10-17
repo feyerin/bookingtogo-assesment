@@ -25,7 +25,6 @@ export default function ProductGrid({ initialProducts, showFilter = true }: Prop
 
   return (
     <section>
-      {/* Filter */}
       {showFilter && (
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-semibold">
@@ -65,14 +64,12 @@ export default function ProductGrid({ initialProducts, showFilter = true }: Prop
         </div>
       )}
 
-      {/* Product grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {products.slice(0, visible).map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
 
-      {/* Load more */}
       {visible < products.length && (
         <div className="flex justify-center mt-8">
           <button

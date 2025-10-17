@@ -10,7 +10,7 @@ export default function DarkModeToggle() {
     const html = document.documentElement;
     const isDarkStored = localStorage.theme === "dark";
 
-    html.classList.add("light"); // selalu aktif
+    html.classList.add("light");
     if (isDarkStored) html.classList.add("dark");
 
     setIsDark(isDarkStored);

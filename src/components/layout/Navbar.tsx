@@ -15,7 +15,6 @@ export default function Navbar() {
   const router = useRouter();
   const searchRef = useRef<HTMLDivElement>(null);
 
-  // --- Detect dark mode ---
   useEffect(() => {
     const html = document.documentElement;
     setIsDark(html.classList.contains("dark"));
@@ -31,7 +30,6 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  // --- Fetch data ketika user ngetik ---
   useEffect(() => {
     if (!query.trim()) {
       setResults([]);
@@ -45,7 +43,7 @@ export default function Navbar() {
         const filtered = data.filter((item: any) =>
           item.title.toLowerCase().includes(query.toLowerCase())
         );
-        setResults(filtered.slice(0, 5)); // limit hasil ke 5
+        setResults(filtered.slice(0, 5));
       } catch (err) {
         console.error("Error fetching search:", err);
       }
@@ -55,7 +53,6 @@ export default function Navbar() {
     return () => clearTimeout(timeout);
   }, [query]);
 
-  // --- Handle enter ---
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && query.trim()) {
       router.push(`/search?q=${encodeURIComponent(query.trim())}`);
@@ -63,7 +60,6 @@ export default function Navbar() {
     }
   };
 
-  // --- Tutup dropdown kalau klik di luar ---
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
@@ -74,7 +70,6 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // --- Clear input ---
   const clearSearch = () => {
     setQuery("");
     setResults([]);
@@ -88,7 +83,6 @@ export default function Navbar() {
       `}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-4">
-        {/* Left: logo + menu */}
         <div className="flex items-center gap-6">
           <Link
             href="/"
@@ -117,7 +111,6 @@ export default function Navbar() {
           </ul>
         </div>
 
-        {/* Right: search + toggle */}
         <div className="flex items-center gap-3 relative" ref={searchRef}>
           <div className="relative flex items-center">
             <input
@@ -139,7 +132,6 @@ export default function Navbar() {
               `}
             />
 
-            {/* Ganti icon tergantung kondisi */}
             {query ? (
               <X
                 size={18}
@@ -160,7 +152,6 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Dropdown Search */}
           {results.length > 0 && (
             <div
               className={`absolute top-11 right-0 w-72 shadow-lg rounded-lg border mt-1 z-50
