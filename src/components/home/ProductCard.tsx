@@ -5,6 +5,9 @@ import type { Product } from "@/types/product";
 import { formatCurrency } from "@/utils/currency";
 
 export default function ProductCard({ product }: { product: Product }) {
+  // Tambahkan default rating untuk mencegah undefined error
+  const rating = product.rating ?? { rate: 0, count: 0 };
+
   return (
     <Link
       href={`/product/${product.id}`}
@@ -18,17 +21,19 @@ export default function ProductCard({ product }: { product: Product }) {
           className="object-contain p-4 rounded-xl bg-[#EEF2F7]"
         />
       </div>
+
       <div className="p-4">
         <p className="text-xs text-gray-500 capitalize">{product.category}</p>
+
         <div className="flex items-center gap-1 text-sm mb-1">
-          <StarRating rating={product.rating.rate} />
-          <span className="text-gray-500 text-xs">
-            ({product.rating.count})
-          </span>
+          <StarRating rating={rating.rate} />
+          <span className="text-gray-500 text-xs">({rating.count})</span>
         </div>
+
         <h3 className="text-sm font-medium line-clamp-2 mb-2 dark:text-black">
           {product.title}
         </h3>
+
         <p className="font-semibold text-black">
           {formatCurrency(product.price)}
         </p>

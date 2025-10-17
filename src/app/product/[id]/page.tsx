@@ -3,14 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Star } from "lucide-react";
 
-interface Props {
-  params: {
-    id: string;
-  };
-}
-
-export default async function ProductDetailPage({ params }: Props) {
-  const product = await getProductById(params.id);
+export default async function ProductDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const product = await getProductById(id);
 
   if (!product) {
     return (
@@ -26,7 +25,10 @@ export default async function ProductDetailPage({ params }: Props) {
         <nav className="flex items-center space-x-2">
           <Link href="/" className="hover:text-orange-500">Home</Link>
           <span>&gt;</span>
-          <Link href={`/category/${product.category}`} className="hover:text-orange-500 capitalize">
+          <Link
+            href={`/category/${product.category}`}
+            className="hover:text-orange-500 capitalize"
+          >
             {product.category}
           </Link>
           <span>&gt;</span>
@@ -59,9 +61,7 @@ export default async function ProductDetailPage({ params }: Props) {
             </span>
           </div>
 
-          <p className="leading-relaxed mb-6">
-            {product.description}
-          </p>
+          <p className="leading-relaxed mb-6">{product.description}</p>
 
           <button
             disabled
@@ -76,7 +76,6 @@ export default async function ProductDetailPage({ params }: Props) {
           </button>
         </div>
       </div>
-
     </div>
   );
 }

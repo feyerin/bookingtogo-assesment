@@ -1,4 +1,4 @@
-// app/category/[slug]/page.tsx
+import { Product } from "@/types/product";
 import ProductGrid from "@/components/home/ProductGrid";
 import { getAllProducts } from "@/lib/api";
 import { notFound } from "next/navigation";
@@ -13,16 +13,16 @@ const categoryMap: Record<string, string> = {
 export default async function CategoryPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
+  const { slug } = await params;
   const products = await getAllProducts();
 
   const apiCategory = categoryMap[slug];
   if (!apiCategory) notFound();
 
   const filtered = products.filter(
-    (p: any) => p.category.toLowerCase() === apiCategory.toLowerCase()
+    (p: Product) => p.category.toLowerCase() === apiCategory.toLowerCase()
   );
 
   if (filtered.length === 0) notFound();

@@ -5,12 +5,13 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { Search, X } from "lucide-react";
 import DarkModeToggle from "./DarkModeToggle";
+import type { Product } from "@/types/product"; // ✅ Import tipe Product
 
 const categories = ["Men", "Women", "Jewelry", "Electronic"];
 
 export default function Navbar() {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<Product[]>([]); // ✅ pakai Product[]
   const [isDark, setIsDark] = useState(false);
   const router = useRouter();
   const searchRef = useRef<HTMLDivElement>(null);
@@ -39,8 +40,8 @@ export default function Navbar() {
     const fetchData = async () => {
       try {
         const res = await fetch("https://fakestoreapi.com/products");
-        const data = await res.json();
-        const filtered = data.filter((item: any) =>
+        const data: Product[] = await res.json(); // ✅ tentukan tipe data hasil fetch
+        const filtered = data.filter((item) =>
           item.title.toLowerCase().includes(query.toLowerCase())
         );
         setResults(filtered.slice(0, 5));
