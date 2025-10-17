@@ -1,4 +1,4 @@
-# BookingToGO Assesment (Next.js)
+# BookingToGo Assesment (Next.js)
 
 
 ---
